@@ -1,0 +1,61 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:id="@+id/MCABuddy_AddExpertise"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.adminibm.mcabuddy.MCABuddy_AddExpertise">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/addExpertise"
+        android:id="@+id/Heading_textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="32sp"
+        android:background="@drawable/abc_textfield_default_mtrl_alpha"/>
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:id="@+id/addExpertise_editText"
+        android:layout_marginTop="100dp"
+        android:hint="@string/addExpertise"
+        android:textColor="#ff00b0f0"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/Heading_textView"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:id="@+id/email_editText"
+        android:layout_marginTop="40dp"
+        android:hint="@string/email_hint"
+        android:layout_below="@+id/addExpertise_editText"
+        android:layout_alignStart="@+id/addExpertise_editText"
+        android:textColor="#ff00b0f0"
+        android:inputType="textEmailAddress" />
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:text="@string/title_activity_add_expertise"
+        android:id="@+id/add_button"
+        android:layout_marginTop="40dp"
+        android:layout_alignEnd="@+id/searchUser_editText"
+        android:textColor="#fffefefe"
+        android:background="#ff00b0f0"
+        android:layout_below="@+id/email_editText"
+        android:onClick="addExpertise"/>
+
+</RelativeLayout>

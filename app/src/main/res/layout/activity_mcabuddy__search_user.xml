@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/MCABuddy_SearchUser"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.adminibm.mcabuddy.MCABuddy_SearchUser">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:text="@string/title_activity_mcabuddy__search_user"
+        android:id="@+id/SearchUser_textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:textSize="32sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:id="@+id/searchUser_editText"
+        android:layout_marginTop="40dp"
+        android:hint="@string/searchUser_hint"
+        android:textColor="#ff00b0f0"
+        android:textStyle="bold"
+        android:layout_below="@+id/SearchUser_textView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:text="@string/submit"
+        android:id="@+id/signin_button"
+        android:layout_marginTop="30dp"
+        android:layout_alignEnd="@+id/searchUser_editText"
+        android:textColor="#fffefefe"
+        android:textStyle="bold"
+        android:background="#ff00b0f0"
+        android:layout_below="@+id/searchUser_editText"
+        android:onClick="searchUser"/>
+
+    <ListView
+        android:id="@+id/userResultList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/signin_button">
+    </ListView>
+
+</RelativeLayout>

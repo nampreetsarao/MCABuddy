@@ -1,0 +1,227 @@
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:id="@+id/mainScrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/itemDetailsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="1dp">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="0dp"
+            android:id="@+id/itemListView"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/listItemLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="0dp"
+                tools:context=".MCABuddy_ThreadDetails"
+                android:scrollbars="vertical">
+
+                <TextView
+                    android:id="@+id/lblHeaderItemDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="#ff00b0f0"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:paddingTop="2dp"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/abc_textfield_default_mtrl_alpha" />
+
+                <TextView
+                    android:id="@+id/lblListItemDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:textSize="15dp"
+                    android:textAlignment="center"
+                    android:paddingRight="5dp"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="5dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@+id/lblHeaderItemDetails" />
+            </RelativeLayout>
+        </ScrollView>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/listInfoBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="10dp"
+            android:layout_below="@+id/itemListView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/auther_textView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="false"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:paddingLeft="20dp"
+                android:layout_alignParentTop="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/date_textView"
+                android:layout_below="@+id/auther_textView"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="false"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:paddingLeft="20dp" />
+        </RelativeLayout>
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/listTagBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
+            android:layout_below="@+id/listInfoBarLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/like_imageButton"
+                android:background="@android:drawable/btn_star_big_off"
+                android:clickable="true"
+                android:paddingRight="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true" />
+
+            <EditText
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/tag_editText"
+                android:paddingRight="10dp"
+                android:hint="@string/tag"
+                android:singleLine="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tag1_textView"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tag2_textView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tag1_textView"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tag3_textView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tag2_textView"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tag4_textView"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/tag3_textView"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/tag5_textView"
+                android:layout_toRightOf="@+id/tag4_textView"
+                android:paddingLeft="10dp"
+                android:paddingBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/numberOfLikes_textView"
+                android:layout_alignParentBottom="true"
+                android:textColor="#000000"
+                android:layout_toLeftOf="@+id/like_imageButton"/>
+
+        </RelativeLayout>
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout"
+            android:layout_below="@+id/listTagBarLayout">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="13"
+                android:id="@+id/addComment_editText"
+                android:hint="@string/addComment_hint"
+                android:textColor="#ff00b0f0"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:background="@android:drawable/editbox_background_normal"
+                android:inputType="textMultiLine" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/postComment"
+                android:textColor="@color/textColorPrimary"
+                android:background="@color/colorPrimary"
+                android:id="@+id/postComment_button"
+                android:paddingLeft="5dp"
+                android:clickable="true"
+                android:onClick="onPostClick"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

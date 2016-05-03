@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">MCA Buddy</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="nav_drawer_opened">drawer opened</string>
+    <string name="nav_drawer_closed">drawer closed</string>
+    <string name="title_activity_no_hamburger">NoHamburger</string>
+    <string name="title_activity_no_toolbar">NoToolbar</string>
+    <string name="title_activity_other">OtherActivity</string>
+    <string name="title_activity_change_role">Change Role</string>
+    <string name="title_activity_add_expertise">Add Expertise</string>
+    <string name="title_activity_new_user">Create New User </string>
+    <string name="profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="nothing_to_display">Nothing to display.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_mcabuddy__flash_screen">MCA Buddy</string>
+    <string name="title_activity_mcabuddy__logout">MCABuddy_Logout</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_mcabuddy__profile">MCABuddy_Profile</string>
+    <string name="title_activity_mcabuddy__add_user">MCABuddy_AddUser</string>
+    <string name="title_activity_mcabuddy__change_role">MCABuddy_ChangeRole</string>
+    <string name="title_activity_mcabuddy__add_expertise">MCABuddy_AddExpertise</string>
+    <string name="title_activity_mcabuddy__login">MCABuddy_Login</string>
+
+    <string name="login_button">Log In</string>
+    <string name="user_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="new_user">New User</string>
+    <string name="title_activity_mcabuddy__admin_dashboard">MCA Buddy</string>
+    <string name="title_activity_mcabuddy__user_dashboard">MCA Buddy</string>
+    <string name="copyrights">Copyright &#169; IBM India Pvt. Ltd. 2016</string>
+
+    <string name="fname_hint">First Name</string>
+    <string name="lname_hint">Last Name</string>
+    <string name="email_hint">Email</string>
+    <string name="phone_hint">Phone</string>
+    <string name="searchUser_hint">Search User</string>
+    <string name="addComment_hint">Add Comment</string>
+    <string name="addExpertise">Add Expertise</string>
+    <string name="pwd_hint">Password</string>
+    <string name="accessToken_hint">Access Token</string>
+    <string name="sign_in">Sign In</string>
+    <string name="submit">Submit</string>
+    <string name="spinner_title">Select Role</string>
+    <string name="postComment">Post</string>
+    <string name="title_activity_list_item_details">list_item_details</string>
+    <string name="tag">Tag</string>
+    <string name="like">Like</string>
+    <string name="logout_popup">Do you want to logout?</string>
+    <string name="logout_yes">Yes</string>
+    <string name="logout_no">No</string>
+
+    <!-- Action Bar action items -->
+    <string name="action_search">Search coming soon..</string>
+    <string name="action_location_found">Location Found</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_contacts">Contacts</string>
+    <string name="action_help">Help</string>
+    <string name="action_check_updates">Check for Updates</string>
+    <string name="search_hint">Search</string>
+    <string name="search_label">MCA Buddy</string>
+    <string name="title_activity_mcabuddy__search_user">Search User</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_tab">Tab</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_mcabuddy__post_new_message">MCABuddy_PostNewMessage</string>
+
+    <string name="subject_hint">Subject (max 100 characters)</string>
+    <string name="message_hint">Message (max 300 characters)</string>
+    <string name="header_CreateNewMessage">Post New Message</string>
+
+
+</resources>

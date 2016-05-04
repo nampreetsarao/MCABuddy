@@ -175,7 +175,10 @@ public class MCABuddy_NewUserRegistration extends Activity {
         confirmpassword = (EditText)findViewById(R.id.confirmpassword_edittext);
         confirmpassword.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+
+                
                 Validations.hasText(confirmpassword);
+                Validations.compareText(password,confirmpassword);
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -193,7 +196,6 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });*/
-
 
 
 
@@ -269,6 +271,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         if (!Validations.isPhoneNumber(phone, false)) ret = false;
         if (!Validations.hasText(password)) ret = false;
         if (!Validations.hasText(confirmpassword)) ret = false;
+        if (!Validations.compareText(password, confirmpassword)) ret = false;
         //if (!Validations.isPhoneNumber(accesstoken, false)) ret = false;
 
         return ret;

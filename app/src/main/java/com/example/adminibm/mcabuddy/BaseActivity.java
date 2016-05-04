@@ -186,7 +186,6 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
                             bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
-                            //bodyStringArray[i][1] = "Nampreet Singh";
 
                         }
                         groupsBroadcast = headerStringArray;
@@ -279,6 +278,7 @@ public class BaseActivity extends AppCompatActivity implements
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
                             bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+
                         }
                         groupsInformation = headerStringArray;
 
@@ -369,6 +369,7 @@ public class BaseActivity extends AppCompatActivity implements
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
                             bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+
                         }
                         groupsSos = headerStringArray;
                         childrenSos = bodyStringArray;

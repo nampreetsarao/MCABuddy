@@ -317,7 +317,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
         final TextView textView = new TextView(MCABuddy_ThreadDetails.this);
         textView.setTextSize(20);
         textView.setTextColor(Color.parseColor("#000000"));
-        textView.setBackgroundResource(android.R.drawable.editbox_background_normal);
+        //textView.setBackgroundResource(android.R.drawable.editbox_background_normal);
         textView.setLayoutParams(lparams);
         textView.setText(text);
         return textView;

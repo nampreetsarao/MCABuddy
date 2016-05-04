@@ -212,8 +212,8 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
         message.setTitle(subject);
         message.setLikes(0);
         message.setAuthor(userDetails.getEmail());
-        message.setDate("2016-04-15T00:00:00Z");
-        message.setChannel("broadcast");
+        //message.setDate("2016-04-15T00:00:00Z");
+        message.setChannel(selectedChannel.toLowerCase());
         message.setTags(tags);
 
 

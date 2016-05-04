@@ -1,9 +1,11 @@
 package com.example.adminibm.mcabuddy;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -35,7 +37,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.HttpEntity;
@@ -55,6 +59,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
     public String uuid;
     public int likes;
     private boolean likeClicked;
+    private String threadId;
 
     TextView lblListItemDetails;
     TextView lblHeaderItemText;
@@ -84,6 +89,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
     private Subject userDetails;
     private EditText editText;
     private  String channelName;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -288,6 +294,9 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                 return false;
             }
         });
+
+        pd = ProgressDialog.show(MCABuddy_ThreadDetails.this, "", "Fetching message and thread details...", false);
+        fetchMessagesForThread("");
     }
 
 
@@ -586,5 +595,87 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
             }
         });
     }
+
+    /**
+     * Fetch messages for a channel
+     *
+     */
+    public void fetchMessagesForThread(String threadId) {
+
+        //fetch details for broadcast
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(Constants.baseURL+Constants.getMessageForAThreadURLFirstPart+Constants.fetchMessageForAThread, new AsyncHttpResponseHandler() {
+            @Override
+            public void onStart() {
+            }
+
+            @Override
+            public void onSuccess(int code, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
+                // called when response HTTP status is "200 OK"
+                try {
+                    String json = new String(bytes, "UTF-8");
+                    JSONObject jsonObject = new JSONObject(json);
+                    if(!jsonObject.getString("response").equals("null")) {
+                        List<Message> messageList = new ArrayList<Message>();
+                        String[] headerStringArray = new String[jsonObject.getJSONArray("response").length()];
+                        String[][] bodyStringArray = new String[jsonObject.getJSONArray("response").length()][1];
+
+                        for (int i = 0; i < jsonObject.getJSONArray("response").length(); i++) {
+                            Message message = new Message();
+                            message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
+                            message.setTitle(jsonObject.getJSONArray("response").getJSONObject(i).getString("title"));
+                            message.setMessage(jsonObject.getJSONArray("response").getJSONObject(i).getString("message"));
+                            message.setAuthor(jsonObject.getJSONArray("response").getJSONObject(i).getString("author"));
+
+                            long tms = Long.parseLong(jsonObject.getJSONArray("response").getJSONObject(i).getString("date"));
+                            Date dd = new Date(tms);
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                            message.setDate(sdf.format(dd).toString());
+
+                            message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
+                            message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
+                            List<String> tags = new ArrayList<String>();
+                            if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
+                                for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
+                                    tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                                }
+                            }
+                            message.setTags(tags);
+                            messageList.add(message);
+                            message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
+                            headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
+                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+
+                        }
+
+
+                    }
+
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes, Throwable throwable) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                throwable.printStackTrace();
+                //Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + e.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+        });
+
+
+    }
 }
+
 

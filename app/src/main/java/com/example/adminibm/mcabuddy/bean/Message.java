@@ -12,11 +12,15 @@ public class Message {
     private String title;
     private String message;
     private int likes;
-    private int threadId;
+    private String threadId;
     private String date;
     private List<String> tags = new ArrayList<>();
     private String channel;
     private String author;
+
+    public void setThreadId(String threadId) {
+        this.threadId = threadId;
+    }
 
     public String getAuthor() {
         return author;
@@ -58,12 +62,8 @@ public class Message {
         this.likes = likes;
     }
 
-    public int getThreadId() {
+    public String getThreadId() {
         return threadId;
-    }
-
-    public void setThreadId(int threadId) {
-        this.threadId = threadId;
     }
 
     public String getDate() {

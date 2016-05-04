@@ -97,6 +97,7 @@ public class MCABuddy_AddExpertise extends ActionBarActivity {
 
         emailId=emailEditText.getText().toString();
         expertise=expertiseEditText.getText().toString();
+        expertise=expertise.replaceAll(" ","%20");
 
 
         //fetch the data from shared Preference object

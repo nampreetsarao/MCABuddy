@@ -231,4 +231,7 @@ public class Broadcast extends Fragment {
             TextView text;
         }
     }
+
+
+
 }

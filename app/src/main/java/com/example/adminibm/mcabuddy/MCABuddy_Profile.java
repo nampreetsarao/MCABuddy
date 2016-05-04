@@ -51,15 +51,27 @@ public class MCABuddy_Profile extends Activity {
         // TODO :pending roles and aoe
 
         role = (TextView)findViewById(R.id.ProfileRole_textView);
-        for(String roleValue: userDetails.getRoles()){
-            role.append(roleValue+" ");
+        for(int i=0;i<=userDetails.getRoles().size();i++){
+            if(i==userDetails.getRoles().size()-1){
+                role.append(userDetails.getRoles().get(i));
+            }else{
+                role.append(userDetails.getRoles().get(i)+", ");
+            }
+
 
         }
 
         aoe = (TextView)findViewById(R.id.ProfileAoe_textView);
-        for(String roleValue: userDetails.getAoe()){
-            aoe.append(roleValue+" ");
+        for(int i=0;i<=userDetails.getAoe().size();i++){
+            if(i==userDetails.getAoe().size()-1){
+                aoe.append(userDetails.getAoe().get(i));
+            }else{
+                aoe.append(userDetails.getAoe().get(i)+", ");
+            }
+
+
         }
+
 
     }
 

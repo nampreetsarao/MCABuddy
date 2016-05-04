@@ -61,7 +61,6 @@ public class MCABuddy_NewUserRegistration extends Activity {
     private JSONObject jsonObject;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +76,12 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void afterTextChanged(Editable s) {
                 Validations.hasText(fname);
             }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
         });
 
         lname = (EditText) findViewById(R.id.lname_editText);
@@ -87,8 +90,12 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void afterTextChanged(Editable s) {
                 Validations.hasText(lname);
             }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
         });
 
         email = (EditText) findViewById(R.id.email_editText);
@@ -97,8 +104,12 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void afterTextChanged(Editable s) {
                 Validations.isEmailAddress(email, true);
             }
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
         });
 
         phone = (EditText) findViewById(R.id.phone_edittext);
@@ -137,9 +148,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });*/
 
-        adminCheckBox = (CheckBox)findViewById(R.id.AdmincheckBox);
-        smeCheckBox = (CheckBox)findViewById(R.id.SMEcheckBox);
-        userCheckBox = (CheckBox)findViewById(R.id.UsercheckBox);
+        adminCheckBox = (CheckBox) findViewById(R.id.AdmincheckBox);
+        smeCheckBox = (CheckBox) findViewById(R.id.SMEcheckBox);
+        userCheckBox = (CheckBox) findViewById(R.id.UsercheckBox);
 
         signin = (Button) findViewById(R.id.signin_button);
         signin.setOnClickListener(new View.OnClickListener() {
@@ -151,16 +162,15 @@ public class MCABuddy_NewUserRegistration extends Activity {
                  */
                 if (checkValidation()) {
                     submitForm();
-                    clearItems();
-                }
-                else {
+                    //clearItems();
+                } else {
                     Toast.makeText(MCABuddy_NewUserRegistration.this, "Form contains error", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private void clearItems(){
+    private void clearItems() {
         fname.getText().clear();
         lname.getText().clear();
         email.getText().clear();
@@ -169,33 +179,34 @@ public class MCABuddy_NewUserRegistration extends Activity {
     }
 
 
-
     private void submitForm() {
 
         //TODO replace this with teh values in shared preferences
-        Requester requester = new Requester("393654c8d354b64ba0c588e2b3944c7a40ae4965","mcabuddyAdmin@in.ibm.com");
+        Requester requester = new Requester("393654c8d354b64ba0c588e2b3944c7a40ae4965", "mcabuddyAdmin@in.ibm.com");
         List<String> roles = new ArrayList<>();
-        if(adminCheckBox.isChecked() == true){
+        if (adminCheckBox.isChecked() == true) {
             roles.add(adminCheckBox.getText().toString());
         }
 
-        if(smeCheckBox.isChecked() == true){
+        if (smeCheckBox.isChecked() == true) {
             roles.add(smeCheckBox.getText().toString());
         }
 
-        if(userCheckBox.isChecked() == true){
+        if (userCheckBox.isChecked() == true) {
             roles.add(userCheckBox.getText().toString());
         }
 
-        if(adminCheckBox.isChecked() == false && smeCheckBox.isChecked() == false && userCheckBox.isChecked() == false){
+        if (adminCheckBox.isChecked() == false && smeCheckBox.isChecked() == false && userCheckBox.isChecked() == false) {
             roles.add("user");
         }
 
-
-        Subject subject = new Subject(fname.getText().toString(),lname.getText().toString(),email.getText().toString(),phone.getText().toString(),password.getText().toString(),roles,null);
+        /*List<String> aoe= new ArrayList<>();
+        aoe.add("Java");*/
+        Subject subject = new Subject(fname.getText().toString(), lname.getText().toString(), email.getText().toString(), phone.getText().toString(), password.getText().toString(), roles, null);
         NewUserBean newUserBean = new NewUserBean(requester, subject);
         Gson gson = new Gson();
-        Type type = new TypeToken<NewUserBean>() {}.getType();
+        Type type = new TypeToken<NewUserBean>() {
+        }.getType();
         String json = gson.toJson(newUserBean, type);
         try {
             createNewUser(json);
@@ -241,14 +252,15 @@ public class MCABuddy_NewUserRegistration extends Activity {
 
     /**
      * Create new user
+     *
      * @param jsonString
      */
-    private void createNewUser(String jsonString) throws Exception{
+    private void createNewUser(String jsonString) throws Exception {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("content-type", "application/json");
         HttpEntity entity = null;
-            entity = new cz.msebera.android.httpclient.entity.StringEntity(jsonString, ContentType.APPLICATION_JSON);
+        entity = new cz.msebera.android.httpclient.entity.StringEntity(jsonString, ContentType.APPLICATION_JSON);
 
         /*TODO to revisit
         HttpEntity stringEntity =null;
@@ -261,9 +273,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         }*/
 
 
-
-
-        client.put(getBaseContext(), Constants.baseURL+Constants.newUserURL, null, entity, "application/json", new AsyncHttpResponseHandler() {
+        client.put(getBaseContext(), Constants.baseURL + Constants.newUserURL, null, entity, "application/json", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
                 // called when response HTTP status is "200 OK"
@@ -275,10 +285,12 @@ public class MCABuddy_NewUserRegistration extends Activity {
                     if (jsonObject.getString("status").equals("SUCCESS")) {
                         Toast.makeText(getApplicationContext(), "User Added successfully !!", Toast.LENGTH_LONG).show();
                         //check if the user is admin or not
+                        onBackPressed();
                     } else {
                         Toast.makeText(getApplicationContext(), "Unable to add user at this time, try later!!", Toast.LENGTH_LONG).show();
                     }
                     pd.dismiss();
+
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     Toast.makeText(getApplicationContext(), "Error Occurred [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
@@ -296,7 +308,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 pd.dismiss();
                 throwable.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.getCause().getMessage().toString(), Toast.LENGTH_LONG).show();
 
             }
 
@@ -310,5 +322,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
                 // called when request is retried
             }
         });
+    }
+
+    public void onBackPressed() {
+        MCABuddy_NewUserRegistration.this.finish();
     }
 }

@@ -150,6 +150,7 @@ public class MCABuddy_ChangeRole extends Activity {
                                     jsonObject = new JSONObject(jsonResponse);
                                     if (jsonObject.getString("status").equals("SUCCESS")) {
                                         Toast.makeText(getApplicationContext(), "Role Updated", Toast.LENGTH_LONG).show();
+                                        onBackPressed();
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Role Update Failed. Please contact administrator.", Toast.LENGTH_LONG).show();
                                     }
@@ -219,6 +220,9 @@ public class MCABuddy_ChangeRole extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onBackPressed() {
+        MCABuddy_ChangeRole.this.finish();
+    }
 
 
 

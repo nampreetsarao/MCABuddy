@@ -134,6 +134,7 @@ public class MCABuddy_AddExpertise extends ActionBarActivity {
                                     jsonObject = new JSONObject(jsonResponse);
                                     if (jsonObject.getString("status").equalsIgnoreCase("SUCCESS")) {
                                         Toast.makeText(getApplicationContext(), "Added expertise successfully.", Toast.LENGTH_LONG).show();
+                                        onBackPressed();
                                     } else {
                                         Toast.makeText(getApplicationContext(), "Adding expertise failed. Please contact administrator.", Toast.LENGTH_LONG).show();
                                     }
@@ -168,5 +169,11 @@ public class MCABuddy_AddExpertise extends ActionBarActivity {
                         }
         );
     }
+
+
+    public void onBackPressed() {
+        MCABuddy_AddExpertise.this.finish();
+    }
+
 
 }

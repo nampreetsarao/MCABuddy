@@ -72,7 +72,7 @@ public class MCABuddy_SearchUser extends ActionBarActivity {
 
         AsyncHttpClient client = new AsyncHttpClient();
 
-        client.get(Constants.baseURL+Constants.searchUserByAny+any, new AsyncHttpResponseHandler() {
+        client.get(Constants.baseURL + Constants.searchUserByAny + any, new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int code, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
@@ -109,8 +109,8 @@ public class MCABuddy_SearchUser extends ActionBarActivity {
                             subject.setLname(responseObj.getString("lname"));
                             subjects.add(subject);
                         }*/
-
-                    }else{
+                        onBackPressed();
+                    } else {
 
                         //todo add code if required.
                     }
@@ -144,4 +144,10 @@ public class MCABuddy_SearchUser extends ActionBarActivity {
         });
 
     }
+
+    public void onBackPressed() {
+        MCABuddy_SearchUser.this.finish();
+    }
+
+
 }

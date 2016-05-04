@@ -11,10 +11,28 @@
         android:background="#ffffffff"
         android:textSize="15sp"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="0dp"
         android:paddingLeft="5dp"
         android:clickable="true"
         android:ellipsize="end"
         android:singleLine="false"
         android:maxLines="3"/>
+    <TextView
+        android:id="@+id/lblListItem2"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ffffffff"
+        android:textSize="12sp"
+        android:textColor="#808080"
+        android:textStyle="italic"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp"
+        android:paddingLeft="0dp"
+        android:clickable="true"
+        android:ellipsize="end"
+        android:singleLine="false"
+        android:maxLines="3"/>
+
+
 </LinearLayout> 

@@ -160,8 +160,8 @@ public class Broadcast extends Fragment {
             if (convertView == null) {
                 convertView = inf.inflate(R.layout.list_item, parent, false);
                 holder = new ViewHolder();
-
                 holder.text = (TextView) convertView.findViewById(R.id.lblListItem);
+                holder.subText =(TextView) convertView.findViewById(R.id.lblListItem2);
                 convertView.setTag(holder);
             } else {
                 holder = (ViewHolder) convertView.getTag();
@@ -169,9 +169,13 @@ public class Broadcast extends Fragment {
 
             if(getChild(groupPosition, childPosition).toString() != null) {
                 holder.text.setText(getChild(groupPosition, childPosition).toString());
+                holder.subText.setText(messageList.get(groupPosition).getAuthor()+"  "+messageList.get(groupPosition).getDate());
+
+                //
             }
 
             strDetailText = getChild(groupPosition, childPosition).toString();
+
             strheader = getGroup(groupPosition).toString();
             //Toast.makeText(getActivity(),strheader, Toast.LENGTH_LONG).show();
 
@@ -189,8 +193,11 @@ public class Broadcast extends Fragment {
                     itemDetails.putString("strHeader", strheader);
                     itemDetails.putString("strAuther", messageList.get(groupPosition).getAuthor());
                     itemDetails.putString("strDate", messageList.get(groupPosition).getDate());
-                    //// TODO: 5/1/2016 change this to thread id 
-                    itemDetails.putString("threadId",messageList.get(groupPosition).getUuid());
+                    //// TODO: 5/1/2016 change this to thread id
+                    if(messageList.get(groupPosition).getThreadId()!=null && !messageList.get(groupPosition).getThreadId().equalsIgnoreCase("null")){
+                        itemDetails.putString("threadId",messageList.get(groupPosition).getThreadId());
+                    }
+
                     itemDetails.putString("uuid", messageList.get(groupPosition).getUuid());
                     itemDetails.putInt("likes",messageList.get(groupPosition).getLikes());
                     itemDetails.putString("channelName",messageList.get(groupPosition).getChannel());
@@ -229,6 +236,7 @@ public class Broadcast extends Fragment {
 
         private class ViewHolder {
             TextView text;
+            TextView subText;
         }
     }
 

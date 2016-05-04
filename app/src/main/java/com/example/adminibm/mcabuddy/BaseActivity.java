@@ -172,7 +172,7 @@ public class BaseActivity extends AppCompatActivity implements
                             Date dd = new Date(tms);
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
                             message.setDate(sdf.format(dd).toString());
-
+                            message.setThreadId(jsonObject.getJSONArray("response").getJSONObject(i).getString("threadId"));
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
                             message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
                             List<String> tags = new ArrayList<String>();
@@ -186,6 +186,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
                             bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+                            //bodyStringArray[i][1] = "Nampreet Singh";
 
                         }
                         groupsBroadcast = headerStringArray;

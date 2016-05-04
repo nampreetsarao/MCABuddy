@@ -90,6 +90,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
     private EditText editText;
     private  String channelName;
     private ProgressDialog pd;
+    List<Message> messageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,10 +194,10 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
             public void onClick(View v) {
 
                 //Fetching details from preferences
-                mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
+                mPrefs = getSharedPreferences("user", Context.MODE_PRIVATE);
                 //Fetch the data from shared Preference object
                 Gson gson = new Gson();
-                mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
+                mPrefs = getSharedPreferences("user", Context.MODE_PRIVATE);
                 String json = mPrefs.getString("userDetails", "");
                 userDetails = gson.fromJson(json, Subject.class);
 
@@ -206,10 +207,9 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                 handle_listItemHandle.postDelayed(scrollListItem, 1000);
 
                 //*************************Make service call to persist the reply********************************************
-                if(addcommentTextView.getText().length() == 0){
+                if (addcommentTextView.getText().length() == 0) {
                     Toast.makeText(getApplicationContext(), "Post cannot be empty.", Toast.LENGTH_LONG).show();
-                }
-                else{
+                } else {
                     createMessageForReply();
                 }
             }
@@ -295,8 +295,12 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
             }
         });
 
-        pd = ProgressDialog.show(MCABuddy_ThreadDetails.this, "", "Fetching message and thread details...", false);
-        fetchMessagesForThread("");
+
+        if (bundle.getString("threadId")!=null ) {
+            pd = ProgressDialog.show(MCABuddy_ThreadDetails.this, "", "Fetching message and thread details...", false);
+            fetchMessagesForThread(bundle.getString("threadId"));
+         }
+
     }
 
 
@@ -604,7 +608,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
 
         //fetch details for broadcast
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(Constants.baseURL+Constants.getMessageForAThreadURLFirstPart+Constants.fetchMessageForAThread, new AsyncHttpResponseHandler() {
+        client.get(Constants.baseURL+Constants.fetchMessageForAThread+threadId+Constants.forPagination, new AsyncHttpResponseHandler() {
             @Override
             public void onStart() {
             }
@@ -616,7 +620,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                     String json = new String(bytes, "UTF-8");
                     JSONObject jsonObject = new JSONObject(json);
                     if(!jsonObject.getString("response").equals("null")) {
-                        List<Message> messageList = new ArrayList<Message>();
+                        messageList = new ArrayList<Message>();
                         String[] headerStringArray = new String[jsonObject.getJSONArray("response").length()];
                         String[][] bodyStringArray = new String[jsonObject.getJSONArray("response").length()][1];
 
@@ -642,15 +646,10 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                             }
                             message.setTags(tags);
                             messageList.add(message);
-                            message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
-                            headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
-                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
-
+                            mLayout.addView(createNewTextView(message.getMessage() + System.getProperty("line.separator") + message.getAuthor()));
                         }
-
-
                     }
-
+                    pd.dismiss();
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

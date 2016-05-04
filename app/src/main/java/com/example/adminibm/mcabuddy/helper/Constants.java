@@ -31,6 +31,7 @@ public final class Constants {
     public static String replyToMessagePart1="/channels/";
     public static String replyToMessagePart2="/message/";
     public static String replyToMessagePart3="/reply";
+    public static String fetchMessageForAThread="/channels/messages/thread/";
 
 
 

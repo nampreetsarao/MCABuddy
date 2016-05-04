@@ -176,8 +176,10 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
                             message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
                             List<String> tags = new ArrayList<String>();
-                            for(int j=0;j<jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length();j++){
-                                tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                            if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
+                                for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
+                                    tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                                }
                             }
                             message.setTags(tags);
                             messageList.add(message);
@@ -267,8 +269,10 @@ public class BaseActivity extends AppCompatActivity implements
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
                             List<String> tags = new ArrayList<String>();
-                            for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
-                                tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                            if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
+                                for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
+                                    tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                                }
                             }
                             message.setTags(tags);
                             messageList.add(message);
@@ -354,9 +358,12 @@ public class BaseActivity extends AppCompatActivity implements
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
                             List<String> tags = new ArrayList<String>();
-                            for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
-                                tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                            if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
+                                for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
+                                    tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                                }
                             }
+
                             message.setTags(tags);
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
@@ -440,8 +447,10 @@ public class BaseActivity extends AppCompatActivity implements
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
                             List<String> tags = new ArrayList<String>();
-                            for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
-                                tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                            if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
+                                for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
+                                    tags.add(jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").getString(j));
+                                }
                             }
                             message.setTags(tags);
                             messageList.add(message);

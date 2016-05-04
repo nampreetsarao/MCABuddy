@@ -183,7 +183,9 @@ public class BaseActivity extends AppCompatActivity implements
                             messageList.add(message);
                             message.setUuid(jsonObject.getJSONArray("response").getJSONObject(i).getString("uuid"));
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
-                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message")
+                                    + System.getProperty("line.separator") + " - " + jsonObject.getJSONArray("response").getJSONObject(i).getString("author")
+                                    + System.getProperty("line.separator") + " - " + sdf.format(dd).toString();
 
                         }
                         groupsBroadcast = headerStringArray;
@@ -273,7 +275,9 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTags(tags);
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
-                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message")
+                                    + System.getProperty("line.separator") + " - " + jsonObject.getJSONArray("response").getJSONObject(i).getString("author")
+                                    + System.getProperty("line.separator") + " - " + sdf.format(dd).toString();
                         }
                         groupsInformation = headerStringArray;
 
@@ -360,7 +364,9 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTags(tags);
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
-                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message")
+                                    + System.getProperty("line.separator") + " - " + jsonObject.getJSONArray("response").getJSONObject(i).getString("author")
+                                    + System.getProperty("line.separator") + " - " + sdf.format(dd).toString();
                         }
                         groupsSos = headerStringArray;
                         childrenSos = bodyStringArray;
@@ -446,7 +452,9 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTags(tags);
                             messageList.add(message);
                             headerStringArray[i] = jsonObject.getJSONArray("response").getJSONObject(i).getString("title");
-                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message");
+                            bodyStringArray[i][0] = jsonObject.getJSONArray("response").getJSONObject(i).getString("message")
+                                    + System.getProperty("line.separator") + " - " + jsonObject.getJSONArray("response").getJSONObject(i).getString("author")
+                                    + System.getProperty("line.separator") + " - " + sdf.format(dd).toString();
                         }
                         groupsKnowledge = headerStringArray;
                         childrenKnowledge = bodyStringArray;

@@ -16,6 +16,7 @@ public class Validations {
 
     // Error Messages
     private static final String REQUIRED_MSG = "required";
+    private static final String COMPARE_MSG = "should be same as password";
     private static final String EMAIL_MSG = "invalid email";
     private static final String PHONE_MSG = "###-#######";
 
@@ -61,5 +62,20 @@ public class Validations {
             return false;
         }
         return true;
+    }
+
+    public static boolean compareText(EditText pwdtext1, EditText conpwdtext2){
+        String text1 = pwdtext1.getText().toString().trim();
+        String text2 = conpwdtext2.getText().toString().trim();
+        //pwdtext1.setError(null);
+        conpwdtext2.setError(null);
+
+        //If text1 == text2 means confirm password and password match
+        if(!text2.equals(text1)){
+            conpwdtext2.setError(COMPARE_MSG);
+            return false;
+        }
+        return true;
+
     }
 }

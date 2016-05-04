@@ -42,6 +42,7 @@
     <string name="addComment_hint">Add Comment</string>
     <string name="addExpertise">Add Expertise</string>
     <string name="pwd_hint">Password</string>
+    <string name="Confirmpwd_hint">Confirm Password</string>
     <string name="accessToken_hint">Access Token</string>
     <string name="sign_in">Sign In</string>
     <string name="submit">Submit</string>

@@ -47,6 +47,7 @@ public class MCABuddy_Login extends ActionBarActivity {
     public EditText EmailEditText;
     public EditText PasswordEditText;
     public Button LoginButton;
+    public Button SigninButton;
 
     public String email;
     public String password;
@@ -57,6 +58,7 @@ public class MCABuddy_Login extends ActionBarActivity {
     private Bundle bundle;
 
     private Intent dashboardIntent;
+    private Intent newUserIntent;
     //private Intent subscriberDashboardIntent;
 
     private ProgressDialog pd;
@@ -72,12 +74,19 @@ public class MCABuddy_Login extends ActionBarActivity {
         EmailEditText = (EditText) findViewById(R.id.email_editText);
         PasswordEditText = (EditText) findViewById(R.id.password_editText);
         LoginButton = (Button) findViewById(R.id.login_button);
+        SigninButton = (Button) findViewById(R.id.signin_button);
         dashboardIntent = new Intent(MCABuddy_Login.this, MCABuddy_Dashboard.class);
 
         //initializing the sharedPreference object
         sharedPreferences = getSharedPreferences("user",MODE_PRIVATE);
 
-
+        SigninButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newUserIntent = new Intent(MCABuddy_Login.this, MCABuddy_NewUserRegistration.class);
+                startActivity(newUserIntent);
+            }
+        });
     }
 
 

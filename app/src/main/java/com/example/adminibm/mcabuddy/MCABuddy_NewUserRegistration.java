@@ -2,6 +2,8 @@ package com.example.adminibm.mcabuddy;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.adminibm.mcabuddy.bean.NewUserBean;
@@ -45,11 +48,13 @@ import cz.msebera.android.httpclient.entity.ContentType;
 
 public class MCABuddy_NewUserRegistration extends Activity {
 
+    public TextView listHeader;
     public EditText fname;
     public EditText lname;
     public EditText email;
     public EditText phone;
     public EditText password;
+    public EditText confirmpassword;
     //public EditText accesstoken;
     public CheckBox adminCheckBox;
     public CheckBox smeCheckBox;
@@ -60,11 +65,39 @@ public class MCABuddy_NewUserRegistration extends Activity {
     private ProgressDialog pd;
     private JSONObject jsonObject;
 
+    SharedPreferences mPrefs;
+    private Subject userDetails;
+    private EditText editText;
+    private  String channelName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mcabuddy__new_user_registration);
+
+        listHeader = (TextView) findViewById(R.id.lblListHeader);
+        adminCheckBox = (CheckBox) findViewById(R.id.AdmincheckBox);
+        smeCheckBox = (CheckBox) findViewById(R.id.SMEcheckBox);
+        userCheckBox = (CheckBox) findViewById(R.id.UsercheckBox);
+
+        signin = (Button) findViewById(R.id.signin_button);
+
+        //*************Changing UI for new Signup****************************
+        //Fetching details from preferences
+        mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
+        //Fetch the data from shared Preference object
+        Gson gson = new Gson();
+        mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
+        String json = mPrefs.getString("userDetails", "");
+        userDetails = gson.fromJson(json, Subject.class);
+
+        if(userDetails == null){
+            listHeader.setText("Sign Up");
+            adminCheckBox.setVisibility(CheckBox.GONE);
+            smeCheckBox.setVisibility(CheckBox.GONE);
+            userCheckBox.setVisibility(CheckBox.GONE);
+        }
 
         registerViews();
     }
@@ -139,6 +172,19 @@ public class MCABuddy_NewUserRegistration extends Activity {
             }
         });
 
+        confirmpassword = (EditText)findViewById(R.id.confirmpassword_edittext);
+        confirmpassword.addTextChangedListener(new TextWatcher() {
+            public void afterTextChanged(Editable s) {
+                Validations.hasText(confirmpassword);
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+
 /*        accesstoken = (EditText) findViewById(R.id.accesstoken_edittext);
         accesstoken.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
@@ -148,11 +194,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });*/
 
-        adminCheckBox = (CheckBox) findViewById(R.id.AdmincheckBox);
-        smeCheckBox = (CheckBox) findViewById(R.id.SMEcheckBox);
-        userCheckBox = (CheckBox) findViewById(R.id.UsercheckBox);
 
-        signin = (Button) findViewById(R.id.signin_button);
+
+
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -176,6 +220,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         email.getText().clear();
         phone.getText().clear();
         password.getText().clear();
+        confirmpassword.getText().clear();
     }
 
 
@@ -223,6 +268,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         if (!Validations.isEmailAddress(email, true)) ret = false;
         if (!Validations.isPhoneNumber(phone, false)) ret = false;
         if (!Validations.hasText(password)) ret = false;
+        if (!Validations.hasText(confirmpassword)) ret = false;
         //if (!Validations.isPhoneNumber(accesstoken, false)) ret = false;
 
         return ret;

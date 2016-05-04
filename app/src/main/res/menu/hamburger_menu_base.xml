@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/MCABuddy_profile"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:src="@drawable/ic_account_box_black_24dp"
+        android:icon="@drawable/ic_account_box_black_24dp"
         android:title="Profile"/>
     <item
         android:id="@+id/MCABuddy_AddUser"

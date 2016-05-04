@@ -2,6 +2,7 @@ package com.example.adminibm.mcabuddy;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -254,6 +255,14 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Unable to post message at this time, try again later!!", Toast.LENGTH_LONG).show();
                     }
                     pd.dismiss();
+                    //need to change, should get value from service call
+                    Intent dashboardIntent= new Intent(MCABuddy_PostNewMessage.this, MCABuddy_Dashboard.class);
+                    Bundle bundle = new Bundle();
+
+                    String loginRole = mPrefs.getString("loginRole", "");
+                    bundle.putString("loginRole", loginRole);
+                    dashboardIntent.putExtras(bundle);
+                    startActivity(dashboardIntent);
                 } catch (JSONException e) {
                     // TODO Auto-generated catch block
                     Toast.makeText(getApplicationContext(), "Error Occurred [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();

@@ -81,7 +81,7 @@ public class MCABuddy_Dashboard extends BaseActivity {
                 break;
             // action with ID action_refresh was selected
             case R.id.action_refresh:
-
+                Toast.makeText(this, "Refreshing data...", Toast.LENGTH_SHORT).show();
                 //need to change, should get value from service call
                 Intent dashboardIntent= new Intent(MCABuddy_Dashboard.this, MCABuddy_Dashboard.class);
                 bundle = new Bundle();
@@ -96,7 +96,7 @@ public class MCABuddy_Dashboard extends BaseActivity {
             case R.id.action_add:
 
                 Intent intent = new Intent(MCABuddy_Dashboard.this, MCABuddy_PostNewMessage.class);
-                Toast.makeText(this, "Add selected", Toast.LENGTH_SHORT).show();
+
                 startActivity(intent);
                 break;
 
@@ -119,7 +119,16 @@ public class MCABuddy_Dashboard extends BaseActivity {
                         //TODO: remove session
 
                         MCABuddy_Dashboard.this.finish();
+                        clearContentsFromSharedPreferences();
                     }
                 }).setNegativeButton("No", null).show();
+
+    }
+
+
+    public void clearContentsFromSharedPreferences(){
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+
     }
 }

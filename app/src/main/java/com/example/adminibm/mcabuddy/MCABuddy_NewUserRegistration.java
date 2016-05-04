@@ -192,12 +192,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         }
 
 
-        //TODO: remove static AOE
-        List<String> aoe = new ArrayList<>();
-        aoe.add("Java");
-        aoe.add("ejs");
-
-        Subject subject = new Subject(fname.getText().toString(),lname.getText().toString(),email.getText().toString(),phone.getText().toString(),password.getText().toString(),roles,aoe);
+        Subject subject = new Subject(fname.getText().toString(),lname.getText().toString(),email.getText().toString(),phone.getText().toString(),password.getText().toString(),roles,null);
         NewUserBean newUserBean = new NewUserBean(requester, subject);
         Gson gson = new Gson();
         Type type = new TypeToken<NewUserBean>() {}.getType();

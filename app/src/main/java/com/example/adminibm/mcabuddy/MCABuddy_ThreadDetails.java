@@ -315,7 +315,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
         final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         final TextView textView = new TextView(MCABuddy_ThreadDetails.this);
-        textView.setTextSize(20);
+        textView.setTextSize(17);
         textView.setTextColor(Color.parseColor("#000000"));
         //textView.setBackgroundResource(android.R.drawable.editbox_background_normal);
         textView.setLayoutParams(lparams);
@@ -326,11 +326,11 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
 
     final LinearLayout.LayoutParams lactionparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
-    private TextView createAutherTextView(String auther){
+    private TextView createAuthorTextView(String auther){
         final TextView auther_textview = new TextView(MCABuddy_ThreadDetails.this);
         lactionparams.gravity = Gravity.LEFT;
 
-        auther_textview.setTextSize(10);
+        auther_textview.setTextSize(12);
         auther_textview.setTextColor(Color.parseColor("#FF4081"));
         auther_textview.setLayoutParams(lactionparams);
         auther_textview.setText(auther);
@@ -646,7 +646,9 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                             }
                             message.setTags(tags);
                             messageList.add(message);
-                            mLayout.addView(createNewTextView(message.getMessage() + System.getProperty("line.separator") + message.getAuthor()));
+                            mLayout.addView(createNewTextView(message.getMessage()));
+                            mLayout.addView(createAuthorTextView(message.getDate() + "  "+message.getAuthor()));
+                            mLayout.addView(createAuthorTextView("____________________________________________"));
                         }
                     }
                     pd.dismiss();

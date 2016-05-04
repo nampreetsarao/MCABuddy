@@ -11,6 +11,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
@@ -26,6 +28,8 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.adminibm.mcabuddy.helper.ShakeDetector;
+
 
 public class MCABuddy_Dashboard extends BaseActivity {
 
@@ -36,7 +40,10 @@ public class MCABuddy_Dashboard extends BaseActivity {
     private Bundle bundle;
 
     private String getRole;
-
+    //********Adding shake sensor*****************
+    private ShakeDetector mShakeDetector;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,26 @@ public class MCABuddy_Dashboard extends BaseActivity {
         //Fetching details from preferences
         mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
         //Fetch the data from shared Preference object
+
+        // ShakeDetector initialization
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
+            @Override
+            public void onShake() {
+                // Refereshing data
+                Toast.makeText(getApplicationContext(), "Refreshing data...", Toast.LENGTH_SHORT).show();
+                //need to change, should get value from service call
+                Intent dashboardIntent= new Intent(MCABuddy_Dashboard.this, MCABuddy_Dashboard.class);
+                bundle = new Bundle();
+
+                String loginrole = mPrefs.getString("loginRole", "");
+                bundle.putString("loginRole", loginrole);
+                dashboardIntent.putExtras(bundle);
+                startActivity(dashboardIntent);
+                //fetchMessagesForChannel();
+            }
+        });
 
     }
 
@@ -63,7 +90,7 @@ public class MCABuddy_Dashboard extends BaseActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
+        searchView.setQueryHint("Coming Soon...");
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -131,4 +158,17 @@ public class MCABuddy_Dashboard extends BaseActivity {
         settings.edit().clear().commit();
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
+
 }

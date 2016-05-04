@@ -262,6 +262,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTitle(jsonObject.getJSONArray("response").getJSONObject(i).getString("title"));
                             message.setMessage(jsonObject.getJSONArray("response").getJSONObject(i).getString("message"));
                             message.setAuthor(jsonObject.getJSONArray("response").getJSONObject(i).getString("author"));
+                            message.setThreadId(jsonObject.getJSONArray("response").getJSONObject(i).getString("threadId"));
                             long tms = Long.parseLong(jsonObject.getJSONArray("response").getJSONObject(i).getString("date"));
                             Date dd = new Date(tms);
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -352,6 +353,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTitle(jsonObject.getJSONArray("response").getJSONObject(i).getString("title"));
                             message.setMessage(jsonObject.getJSONArray("response").getJSONObject(i).getString("message"));
                             message.setAuthor(jsonObject.getJSONArray("response").getJSONObject(i).getString("author"));
+                            message.setThreadId(jsonObject.getJSONArray("response").getJSONObject(i).getString("threadId"));
                             long tms = Long.parseLong(jsonObject.getJSONArray("response").getJSONObject(i).getString("date"));
                             Date dd = new Date(tms);
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
@@ -442,6 +444,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setTitle(jsonObject.getJSONArray("response").getJSONObject(i).getString("title"));
                             message.setMessage(jsonObject.getJSONArray("response").getJSONObject(i).getString("message"));
                             message.setAuthor(jsonObject.getJSONArray("response").getJSONObject(i).getString("author"));
+                            message.setThreadId(jsonObject.getJSONArray("response").getJSONObject(i).getString("threadId"));
                             long tms = Long.parseLong(jsonObject.getJSONArray("response").getJSONObject(i).getString("date"));
                             Date dd = new Date(tms);
                             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");

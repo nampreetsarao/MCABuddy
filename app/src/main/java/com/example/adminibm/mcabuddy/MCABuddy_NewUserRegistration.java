@@ -176,6 +176,7 @@ public class MCABuddy_NewUserRegistration extends Activity {
         confirmpassword.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
 
+                
                 Validations.hasText(confirmpassword);
                 Validations.compareText(password,confirmpassword);
             }

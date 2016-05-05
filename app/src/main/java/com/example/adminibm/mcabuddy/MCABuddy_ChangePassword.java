@@ -1,6 +1,7 @@
 package com.example.adminibm.mcabuddy;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,6 +14,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.adminibm.mcabuddy.helper.Constants;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.entity.ContentType;
+
 
 public class MCABuddy_ChangePassword extends Activity {
 
@@ -21,6 +33,9 @@ public class MCABuddy_ChangePassword extends Activity {
     public EditText newPassword;
     public EditText confirmNewPassword;
     public Button submitButton;
+    private JSONObject updatePasswordJsonObject;
+    private ProgressDialog pd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,10 +106,11 @@ public class MCABuddy_ChangePassword extends Activity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkValidation()){
-                    Toast.makeText(getApplicationContext(),"Form Pass", Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Form Fail", Toast.LENGTH_LONG).show();
+                if (checkValidation()) {
+                    changePassword();
+                   // Toast.makeText(getApplicationContext(), "Form Pass", Toast.LENGTH_LONG).show();
+                } else {
+                   // Toast.makeText(getApplicationContext(), "Form Fail", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -135,4 +151,69 @@ public class MCABuddy_ChangePassword extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void changePassword() {
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("content-type", "application/json");
+
+        RequestParams requestParams = new RequestParams();
+        requestParams.add("oldPwd",oldPassword.getText().toString());
+        requestParams.add("newPwd",newPassword.getText().toString());
+        client.addHeader("content-type", "application/x-www-form-urlencoded");
+
+//        HttpEntity entity = new cz.msebera.android.httpclient.entity.StringEntity("oldPwd="+oldPassword.getText().toString()+"&newPwd="+oldPassword.getText().toString(), "UTF-8");
+        Bundle bundle=getIntent().getExtras();
+        client.patch( Constants.baseURL + Constants.updatePasswordPart1 + bundle.getString("emailId") + Constants.updatePasswordPart2, requestParams, new
+
+                        AsyncHttpResponseHandler() {
+
+                            @Override
+                            public void onSuccess(int code, cz.msebera.android.httpclient.Header[] headers,
+                                                  byte[] bytes) {
+                                // called when response HTTP status is "200 OK"
+                                try {
+                                    pd.dismiss();
+                                    // JSON Object
+                                    String jsonResponse = new String(bytes, "UTF-8");
+                                    updatePasswordJsonObject = new JSONObject(jsonResponse);
+                                    if (updatePasswordJsonObject.getString("status").equalsIgnoreCase("SUCCESS")) {
+                                        Toast.makeText(getApplicationContext(), "Updated password successfully.", Toast.LENGTH_LONG).show();
+                                        onBackPressed();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Updating password failed. Please contact administrator.", Toast.LENGTH_LONG).show();
+                                    }
+                                    pd.dismiss();
+
+                                } catch (JSONException e) {
+                                    // TODO Auto-generated catch block
+                                    Toast.makeText(getApplicationContext(), "Error Occurred [Server's JSON response might be invalid]. Please contact administrator.", Toast.LENGTH_LONG).show();
+                                    e.printStackTrace();
+                                } catch (Exception e) {
+                                    // TODO Auto-generated catch block
+                                    Toast.makeText(getApplicationContext(), "Mostly parsing error. Please contact administrator.", Toast.LENGTH_LONG).show();
+                                    e.printStackTrace();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers,
+                                                  byte[] bytes, Throwable throwable) {
+                                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                                pd.dismiss();
+                                Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.toString() + ".Please contact administrator.", Toast.LENGTH_LONG).show();
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onStart() {
+                                pd = ProgressDialog.show(MCABuddy_ChangePassword.this, "", "Updating password..", false);
+                                // called before request is started
+                            }
+                        }
+        );
+    }
+
+
 }

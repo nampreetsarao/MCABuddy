@@ -118,7 +118,7 @@ public class MCABuddy_Login extends ActionBarActivity {
                 boolean sentToken = sharedPreferences
                         .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
                 if (sentToken) {
-                    Toast.makeText(MCABuddy_Login.this, "Connection to GCM passed.", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(MCABuddy_Login.this, "Connection to GCM passed.", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MCABuddy_Login.this, "Connection to GCM failed.", Toast.LENGTH_SHORT).show();
                 }

@@ -33,6 +33,10 @@ public final class Constants {
     public static String replyToMessagePart3="/reply";
     public static String fetchMessageForAThread="/channels/messages/thread/";
     public static String forPagination="?index=0";
+    public static String updatePasswordPart1="/user/";
+    public static String updatePasswordPart2="/pwd";
+    public static String updatePhonePart1="/user/";
+    public static String updatePhonePart2="/phone/";
 
 
 

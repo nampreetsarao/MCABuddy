@@ -19,7 +19,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:textSize="32sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:background="@drawable/abc_textfield_default_mtrl_alpha" />
 
     <EditText
         android:layout_width="match_parent"

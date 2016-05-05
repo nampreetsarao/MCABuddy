@@ -9,6 +9,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,23 +43,24 @@ import cz.msebera.android.httpclient.entity.ContentType;
 
 public class MCABuddy_PostNewMessage extends AppCompatActivity {
 
-    private TextView subjectTextView;
-    private TextView messageTextView;
-    private EditText tagEditText1;
+    public EditText subjectTextView;
+    public EditText messageTextView;
+    public EditText tagEditText1;
 
-    private TextView tag1;
-    private TextView tag2;
-    private TextView tag3;
-    private TextView tag4;
-    private TextView tag5;
+    public TextView tag1;
+    public TextView tag2;
+    public TextView tag3;
+    public TextView tag4;
+    public TextView tag5;
+    public List<String> tags;
 
     //Creating a shared preference
     SharedPreferences mPrefs;
     private ProgressDialog pd;
 
     //channel spinner
-    private Spinner spinner ;
-    private String selectedChannel;
+    public Spinner spinner ;
+    public String selectedChannel;
     private Subject userDetails;
 
 
@@ -67,8 +70,8 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mcabuddy__post_new_message);
 
-        subjectTextView = (TextView) findViewById(R.id.subject_editText);
-        messageTextView = (TextView) findViewById(R.id.message_editText);
+        subjectTextView = (EditText) findViewById(R.id.subject_editText);
+        messageTextView = (EditText) findViewById(R.id.message_editText);
         tagEditText1 = (EditText)findViewById(R.id.posttag_editText);
 
         tag1 = (TextView)findViewById(R.id.tag1_textView);
@@ -165,16 +168,52 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                doAction();
+
+                if(checkValidation()) {
+                    doAction();
+                }else{
+                    Toast.makeText(MCABuddy_PostNewMessage.this, "Form contains error", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
+        postNewMessageValidation();
+    }
 
+    private void postNewMessageValidation(){
+        subjectTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                Validations.hasText(subjectTextView);
+            }
+        });
+
+        messageTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+                Validations.hasText(messageTextView);
+            }
+        });
+    }
+
+    private boolean checkValidation() {
+        boolean ret = true;
+
+        if (!Validations.hasText(subjectTextView)) ret = false;
+        if (!Validations.hasText(messageTextView)) ret = false;
+        return ret;
     }
 
 
     public void doAction(){
-
         //Fetching details from preferences
         mPrefs= getSharedPreferences("user", Context.MODE_PRIVATE);
         //Fetch the data from shared Preference object
@@ -189,7 +228,7 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
         //Fetch the new message details
         String subject=subjectTextView.getText().toString();
         String body=messageTextView.getText().toString();
-        List<String> tags = new ArrayList<>();
+        tags = new ArrayList<>();
         if(tag1.getText()!=null && tag1.getText().length()>0){
             tags.add(tag1.getText().toString());
         }

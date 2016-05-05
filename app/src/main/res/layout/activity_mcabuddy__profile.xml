@@ -17,7 +17,8 @@
         android:textStyle="bold"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:background="@drawable/abc_textfield_default_mtrl_alpha" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -94,5 +95,27 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="40dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:id="@+id/changephone_button"
+        android:layout_alignBottom="@+id/phone_imageView"
+        android:layout_alignRight="@+id/Profile_textView"
+        android:layout_alignEnd="@+id/Profile_textView"
+        android:background="@drawable/ic_mode_edit_black_24dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/change_password"
+        android:id="@+id/changepassword_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/changephone_button"
+        android:layout_alignEnd="@+id/changephone_button"
+        android:layout_marginBottom="37dp"
+        android:textColor="#fffefefe"
+        android:background="#ff00b0f0" />
 
 </RelativeLayout>

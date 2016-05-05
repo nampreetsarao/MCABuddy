@@ -107,7 +107,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
         // TextWatcher would let us check validation error on the fly
         fname.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+
                 Validations.hasText(fname);
+                Validations.isOnlyText(fname, true);
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -121,7 +123,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
         // TextWatcher would let us check validation error on the fly
         lname.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
+
                 Validations.hasText(lname);
+                Validations.isOnlyText(lname, true);
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -175,8 +179,6 @@ public class MCABuddy_NewUserRegistration extends Activity {
         confirmpassword = (EditText)findViewById(R.id.confirmpassword_edittext);
         confirmpassword.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
-
-                
                 Validations.hasText(confirmpassword);
                 Validations.compareText(password,confirmpassword);
             }
@@ -266,7 +268,9 @@ public class MCABuddy_NewUserRegistration extends Activity {
         boolean ret = true;
 
         if (!Validations.hasText(fname)) ret = false;
+        if (!Validations.isOnlyText(fname, true)) ret = false;
         if (!Validations.hasText(lname)) ret = false;
+        if (!Validations.isOnlyText(lname, true)) ret = false;
         if (!Validations.isEmailAddress(email, true)) ret = false;
         if (!Validations.isPhoneNumber(phone, false)) ret = false;
         if (!Validations.hasText(password)) ret = false;

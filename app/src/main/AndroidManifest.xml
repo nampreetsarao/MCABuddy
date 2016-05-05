@@ -8,24 +8,24 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/mcabuddy_logo"
+        android:icon="@drawable/codertalk_logo"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".SearchResultsActivity" />
         </activity>
         <activity
             android:name=".BaseActivity"
-            android:label="@string/title_activity_base"></activity>
+            android:label="@string/title_activity_base" />
         <activity
             android:name=".MCABuddy_FlashScreen"
             android:label="@string/title_activity_mcabuddy__flash_screen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,45 +35,46 @@
         <activity
             android:name=".MCABuddy_Logout"
             android:label="@string/title_activity_mcabuddy__logout"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_Profile"
             android:label="@string/title_activity_mcabuddy__profile"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_ChangeRole"
             android:label="@string/title_activity_mcabuddy__change_role"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_AddExpertise"
             android:label="@string/title_activity_mcabuddy__add_expertise"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_Login"
             android:label="@string/title_activity_mcabuddy__login"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_Dashboard"
             android:label="@string/title_activity_mcabuddy__admin_dashboard"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MCABuddy_NewUserRegistration"
             android:label="@string/title_activity_mcabuddy__user_dashboard"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" >
+        </activity>
         <activity
             android:name=".MCABuddy_ThreadDetails"
             android:label="@string/title_activity_list_item_details"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".MCABuddy_SearchUser"
             android:label="@string/title_activity_mcabuddy__search_user"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SearchResultsActivity"
             android:label="@string/title_activity_search_results"
             android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -85,9 +86,12 @@
         <activity
             android:name=".MCABuddy_PostNewMessage"
             android:label="@string/title_activity_mcabuddy__post_new_message"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait"></activity>
-
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".MCABuddy_ChangePassword"
+            android:label="@string/title_activity_mcabuddy__change_password" >
+        </activity>
 
         <!-- [START gcm_receiver] -->
         <receiver

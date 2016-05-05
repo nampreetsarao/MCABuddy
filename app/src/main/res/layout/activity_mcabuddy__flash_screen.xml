@@ -15,5 +15,5 @@
         android:layout_centerHorizontal="true"
         android:background="#FFFFFF"
         android:contentDescription="MCA Buddy"
-        android:src="@drawable/mcabuddy_logo" />
+        android:src="@drawable/codertalk_logo" />
 </RelativeLayout>

@@ -168,11 +168,15 @@ public class MCABuddy_Login extends ActionBarActivity {
                                 }
                             }
 
+
                             List<String> aoe = new ArrayList<String>();
                             //populate expertise
-                            for (int i = 0; i < responseObj.getJSONArray("aoe").length(); i++) {
-                                aoe.add(responseObj.getJSONArray("aoe").getString(i));
+                            if(!responseObj.getString("aoe").equalsIgnoreCase("null")){
+                                for (int i = 0; i < responseObj.getJSONArray("aoe").length(); i++) {
+                                    aoe.add(responseObj.getJSONArray("aoe").getString(i));
+                                }
                             }
+
 
                             //Setting user profile information in the shared preferences
                             subject.setAoe(aoe);

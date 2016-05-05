@@ -1,7 +1,9 @@
 package com.example.adminibm.mcabuddy;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.TabLayout;
@@ -615,6 +617,7 @@ public class BaseActivity extends AppCompatActivity implements
         {
             case R.id.MCABuddy_Logout   :
                 startActivity(new Intent(this, MCABuddy_Login.class));
+                clearContentsFromSharedPreferences();
                 return true;
 
             case R.id.MCABuddy_profile  :
@@ -639,5 +642,11 @@ public class BaseActivity extends AppCompatActivity implements
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void clearContentsFromSharedPreferences(){
+        SharedPreferences settings = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        settings.edit().clear().commit();
+
     }
 }

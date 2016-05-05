@@ -25,7 +25,7 @@ import java.util.List;
 public class MCABuddy_SearchUser extends ActionBarActivity {
 
 
-    private EditText email;
+    private EditText anyText;
     private List<Subject> subjects= new ArrayList<>();
 
 
@@ -34,7 +34,7 @@ public class MCABuddy_SearchUser extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mcabuddy__search_user);
         //fetch the email id from the app
-        email = (EditText)findViewById(R.id.searchUser_editText);
+        anyText = (EditText)findViewById(R.id.searchUser_editText);
 
         //calling the API: Get User by Email
          getUserByAny("nampreet");
@@ -67,7 +67,10 @@ public class MCABuddy_SearchUser extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    /**
+     * Service to return the user list based on any search provided by user
+     * @param any
+     */
     public void getUserByAny(String any){
 
         AsyncHttpClient client = new AsyncHttpClient();

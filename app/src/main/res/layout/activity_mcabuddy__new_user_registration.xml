@@ -37,7 +37,8 @@
             android:layout_marginTop="70dp"
             android:hint="@string/fname_hint"
             android:textColor="#ff00b0f0"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:inputType="text" />
 
         <EditText
             android:layout_width="match_parent"
@@ -49,7 +50,8 @@
             android:layout_below="@+id/fname_editText"
             android:layout_alignStart="@+id/fname_editText"
             android:textColor="#ff00b0f0"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:inputType="text" />
 
         <EditText
             android:layout_width="match_parent"

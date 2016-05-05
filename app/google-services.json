@@ -1,0 +1,35 @@
+{
+  "project_info": {
+    "project_number": "441389599932",
+    "project_id": "mcabuddy-5af76"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441389599932:android:83791a4223a299b3",
+        "android_client_info": {
+          "package_name": "com.example.adminibm.mcabuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvAuEQzLVPOsn44WAdzoUIlpcXq_5xleE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

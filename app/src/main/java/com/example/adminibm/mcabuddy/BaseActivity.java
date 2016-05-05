@@ -58,7 +58,7 @@ public class BaseActivity extends AppCompatActivity implements
     private ViewPager viewPager;
 
     private String emailFlag;
-    private String profile_check;
+    private String profile_check="";
 
     //trying
     private String[] groupsBroadcast;
@@ -116,11 +116,16 @@ public class BaseActivity extends AppCompatActivity implements
         //Get the bundle
         Bundle bundle = getIntent().getExtras();
         //Extract the data�
-        profile_check = bundle.getString("loginRole");
+        if(bundle!=null){
+            profile_check = bundle.getString("loginRole");
+        }
+
 
         if(profile_check.equals("user")){
             hideItem();
             //hideTab();
+        }else if (profile_check.isEmpty()){
+            hideItem();
         }
     }
 

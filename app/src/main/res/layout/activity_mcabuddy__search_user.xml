@@ -39,20 +39,29 @@
         android:layout_height="wrap_content"
         android:ems="13"
         android:text="@string/submit"
-        android:id="@+id/signin_button"
+        android:id="@+id/searchUser"
         android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
         android:layout_alignEnd="@+id/searchUser_editText"
         android:textColor="#fffefefe"
         android:textStyle="bold"
         android:background="#ff00b0f0"
         android:layout_below="@+id/searchUser_editText"
-        android:onClick="searchUser"/>
+        android:onClick="onClick"/>
 
     <ListView
         android:id="@+id/userResultList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/signin_button">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchUser">
     </ListView>
 
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="13"
+        android:id="@+id/nothingToDisplay"
+        android:layout_below="@+id/searchUser"
+        android:textSize="15sp"/>
 </RelativeLayout>

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -27,8 +26,10 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'com.google.code.gson:gson:2.6.2'
+
     compile files('libs/volley.jar')
     compile files('libs/core.jar')
     compile files('libs/asynchttp.jar')
     compile files('libs/cz_httpclient.jar')
 }
+apply plugin: 'com.google.gms.google-services'

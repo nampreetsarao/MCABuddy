@@ -2,13 +2,17 @@ package com.example.adminibm.mcabuddy;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;
+import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -20,6 +24,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.http.Header;
@@ -27,8 +33,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.adminibm.mcabuddy.bean.Subject;
+import com.example.adminibm.mcabuddy.gcm.QuickstartPreferences;
+import com.example.adminibm.mcabuddy.gcm.RegistrationIntentService;
 import com.example.adminibm.mcabuddy.helper.Constants;
 import com.example.adminibm.mcabuddy.helper.WebServiceHelper;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -65,6 +75,13 @@ public class MCABuddy_Login extends ActionBarActivity {
     private JSONObject jsonObject;
     private static String admin = "admin";
 
+    //Try for GCM
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private static final String TAG = "MainActivity";
+
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
+    private boolean isReceiverRegistered;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +104,63 @@ public class MCABuddy_Login extends ActionBarActivity {
                 startActivity(newUserIntent);
             }
         });
+        //For GCM
+        setupGCM();
+    }
+
+    public void setupGCM(){
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //mRegistrationProgressBar.setVisibility(ProgressBar.GONE);
+                SharedPreferences sharedPreferences =
+                        PreferenceManager.getDefaultSharedPreferences(context);
+                boolean sentToken = sharedPreferences
+                        .getBoolean(QuickstartPreferences.SENT_TOKEN_TO_SERVER, false);
+                if (sentToken) {
+                    Toast.makeText(MCABuddy_Login.this, "Connection to GCM passed.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MCABuddy_Login.this, "Connection to GCM failed.", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        // Registering BroadcastReceiver
+        registerReceiver();
+        if (checkPlayServices()) {
+            // Start IntentService to register this application with GCM.
+            Intent intent = new Intent(this, RegistrationIntentService.class);
+            startService(intent);
+        }
+    }
+
+    private void registerReceiver(){
+        if(!isReceiverRegistered) {
+            LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                    new IntentFilter(QuickstartPreferences.REGISTRATION_COMPLETE));
+            isReceiverRegistered = true;
+        }
+    }
+
+
+    /**
+     * Check the device to make sure it has the Google Play Services APK. If
+     * it doesn't, display a dialog that allows users to download the APK from
+     * the Google Play Store or enable it in the device's system settings.
+     */
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported.");
+                finish();
+            }
+            return false;
+        }
+        return true;
     }
 
 

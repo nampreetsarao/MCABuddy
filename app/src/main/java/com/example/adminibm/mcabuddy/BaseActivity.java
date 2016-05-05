@@ -1,7 +1,9 @@
 package com.example.adminibm.mcabuddy;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -616,8 +618,16 @@ public class BaseActivity extends AppCompatActivity implements
         switch (id)
         {
             case R.id.MCABuddy_Logout   :
-                startActivity(new Intent(this, MCABuddy_Login.class));
-                clearContentsFromSharedPreferences();
+                new AlertDialog.Builder(this)
+                        .setMessage("Are you sure you want to logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(BaseActivity.this, MCABuddy_Login.class));
+                                clearContentsFromSharedPreferences();
+                            }
+                        }).setNegativeButton("No", null).show();
                 return true;
 
             case R.id.MCABuddy_profile  :

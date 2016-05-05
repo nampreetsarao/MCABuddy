@@ -1,7 +1,10 @@
 package com.example.adminibm.mcabuddy;
 
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.widget.EditText;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -13,14 +16,37 @@ public class Validations {
     // you can change the expression based on your need
     private static final String EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final String PHONE_REGEX = "\\d{3}-\\d{7}";
+    private static final String ONLY_TEXT = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 
     
     // Error Messages
-    private static final String REQUIRED_MSG = "required";
-    private static final String COMPARE_MSG = "should be same as password";
-    private static final String EMAIL_MSG = "invalid email";
+    private static final String REQUIRED_MSG = "Required";
+    private static final String COMPARE_MSG = "Password mismatch";
+    private static final String EMAIL_MSG = "Invalid email";
     private static final String PHONE_MSG = "###-#######";
+    private static final String ONLY_TEXT_MSG = "Only text allowed";
+
+
+    //call this method when you need to check only text validation
+    public static boolean isOnlyText(EditText edittext, boolean required){
+        edittext.setFilters(new InputFilter[]{
+                new InputFilter() {
+                    @Override
+                    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                        if(source.equals("")){
+                            return source;
+                        }
+                        if(source.toString().matches("[a-zA-Z ]+")){
+                            return source;
+                        }
+                        return "";
+                    }
+                }
+        });
+
+        return true;
+    }
 
     // call this method when you need to check email validation
     public static boolean isEmailAddress(EditText editText, boolean required) {

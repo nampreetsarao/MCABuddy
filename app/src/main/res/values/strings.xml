@@ -82,5 +82,13 @@
     <string name="header_CreateNewMessage">Post New Message</string>
     <string name="title_activity_mcabuddy__change_password">MCABuddy_ChangePassword</string>
 
+    <!--Credits to app builders
+    -->
+    <string name="credit">Credits to</string>
+    <string name="tanmay_ambre">tanmay ambre</string>
+    <string name="nampreet_singh">nampreet pal singh</string>
+    <string name="girish_fuluskar">girish d. fuluskar</string>
+    <string name="mcabuddy_ibm">IBM</string>
+    <string name="title_activity_mcabuddy__credits">MCABuddy_Credits</string>
 
 </resources>

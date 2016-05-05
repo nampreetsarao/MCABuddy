@@ -1,42 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="?android:attr/listPreferredItemHeight" tools:context="com.example.adminibm.mcabuddy.MCABuddy_SearchUser"
+    android:layout_height="100dp" tools:context="com.example.adminibm.mcabuddy.MCABuddy_SearchUser"
     android:id="@+id/MCABuddy_SearchUser">
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="16dp"
+        android:layout_marginBottom="1dp"
         android:id="@+id/userName"/>
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
+        android:layout_marginTop="1dp"
         android:textSize="12dp"
-        android:layout_marginTop="10dp"
-        android:id="@+id/emailIdUserDetails"/>
+        android:id="@+id/emailIdUserDetails"
+        android:layout_below="@+id/userName"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="30dp"
+        android:layout_marginTop="1dp"
         android:textSize="12dp"
-        android:id="@+id/phoneNumberUserDetails"/>
-
+        android:id="@+id/phoneNumberUserDetails"
+        android:layout_below="@+id/emailIdUserDetails"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp"
+        android:layout_marginTop="1dp"
         android:textSize="12dp"
-        android:id="@+id/aoeUserDetails"/>
-
+        android:id="@+id/aoeUserDetails"
+        android:layout_below="@+id/phoneNumberUserDetails"/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="40dp"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="2dp"
         android:textSize="12dp"
-        android:id="@+id/roleUserDetails"/>
-
+        android:layout_below="@+id/aoeUserDetails"
+        android:id="@+id/roleUserDetails"
+         />
 </RelativeLayout>

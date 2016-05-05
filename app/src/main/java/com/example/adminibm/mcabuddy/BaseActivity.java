@@ -654,6 +654,10 @@ public class BaseActivity extends AppCompatActivity implements
             case R.id.MCABuddy_SearchUser :
                 startActivity(new Intent(this, MCABuddy_SearchUser.class));
                 return true;
+
+            case R.id.MCABuddy_Credits :
+                startActivity(new Intent(this, MCABuddy_Credits.class));
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

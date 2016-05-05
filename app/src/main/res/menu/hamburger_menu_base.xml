@@ -27,4 +27,9 @@
         android:icon="@android:drawable/ic_delete"
         android:title="Logout"
         android:textSize ="2dip"/>
+    <item
+        android:id="@+id/MCABuddy_Credits"
+        android:icon="@android:drawable/btn_star"
+        android:title="Credits"
+        android:textSize ="2dip"/>
 </menu> 

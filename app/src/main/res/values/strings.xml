@@ -81,6 +81,7 @@
     <string name="message_hint">Message (max 300 characters)</string>
     <string name="header_CreateNewMessage">Post New Message</string>
     <string name="title_activity_mcabuddy__change_password">MCABuddy_ChangePassword</string>
+    <string name="tagLine">I live to code..</string>
 
     <!--Credits to app builders
     -->

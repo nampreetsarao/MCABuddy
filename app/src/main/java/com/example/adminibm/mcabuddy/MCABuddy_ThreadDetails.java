@@ -281,7 +281,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                             }
 
                             //TODO :  decide when to call the below API
-                            tagAMessage(bundle.getString("uuid"),tagEditText.getText().toString());
+                            tagAMessage(bundle.getString("uuid"), tagEditText.getText().toString());
 
                             tagEditText.setText("");
 
@@ -300,7 +300,11 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
             pd = ProgressDialog.show(MCABuddy_ThreadDetails.this, "", "Fetching message and thread details...", false);
             fetchMessagesForThread(bundle.getString("threadId"));
          }
-
+        //Removing the items from strHeader & strDetails
+        bundle.remove("strHeader");
+        bundle.remove("strDetails");
+        bundle.remove("likes");
+        bundle.remove("tags");
     }
 
 

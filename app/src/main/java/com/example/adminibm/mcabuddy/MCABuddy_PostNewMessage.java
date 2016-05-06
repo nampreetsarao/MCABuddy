@@ -26,6 +26,7 @@ import com.example.adminibm.mcabuddy.bean.NewUserBean;
 import com.example.adminibm.mcabuddy.bean.Requester;
 import com.example.adminibm.mcabuddy.bean.Subject;
 import com.example.adminibm.mcabuddy.helper.Constants;
+import com.example.adminibm.mcabuddy.helper.WebServiceHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.loopj.android.http.AsyncHttpClient;
@@ -289,7 +290,10 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
                     JSONObject jsonObject = new JSONObject(json);
                     if (jsonObject.getString("status").equals("SUCCESS")) {
                         Toast.makeText(getApplicationContext(), "Message posted successfully !!", Toast.LENGTH_LONG).show();
-                        //check if the user is admin or not
+                        String header =subjectTextView.getText().toString();
+                        String body=messageTextView.getText().toString();
+                        selectedChannel.toLowerCase();
+                        prepareDataForNotification(header+": "+body, "");
                     } else {
                         Toast.makeText(getApplicationContext(), "Unable to post message at this time, try again later!!", Toast.LENGTH_LONG).show();
                     }
@@ -326,6 +330,95 @@ public class MCABuddy_PostNewMessage extends AppCompatActivity {
             @Override
             public void onStart() {
                 pd = ProgressDialog.show(MCABuddy_PostNewMessage.this, "", "Posting new message..", false);
+            }
+
+            @Override
+            public void onRetry(int retryNo) {
+                // called when request is retried
+            }
+        });
+    }
+
+    /**
+     * Prepare data for sending notification
+      * @param message
+     * @param channelName
+     */
+    private void prepareDataForNotification(String message,String channelName){
+        // Prepare JSON containing the GCM message content. What to send and where to send.
+        JSONObject jGcmData = new JSONObject();
+        JSONObject jData = new JSONObject();
+        try {
+            jData.put("message", message);
+            // Where to send GCM message.
+            if (channelName != null && !channelName.isEmpty()) {
+                jGcmData.put("to", "");
+            } else {
+                jGcmData.put("to", "/topics/global");
+            }
+            // What to send in GCM message.
+            jGcmData.put("data", jData);
+            Gson gson = new Gson();
+
+            try {
+                sentNotification(jGcmData.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /**
+     * Create new user
+     * @param jsonString
+     */
+    private void sentNotification(String jsonString) throws Exception{
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("content-type", "application/json");
+        client.addHeader("Authorization","key="+Constants.KEY);
+        HttpEntity entity = null;
+        entity = new cz.msebera.android.httpclient.entity.StringEntity(jsonString, ContentType.APPLICATION_JSON);
+
+        client.post(getBaseContext(), Constants.gcmURL, null, entity, "application/json", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes) {
+                // called when response HTTP status is "200 OK"
+                try {
+                    // JSON Object
+                    String json = new String(bytes, "UTF-8");
+                    JSONObject jsonObject = new JSONObject(json);
+                    if (!jsonObject.getString("message_id").isEmpty()) {
+                        //Toast.makeText(getApplicationContext(), "Send message via GCM ", Toast.LENGTH_LONG).show();
+                        //check if the user is admin or not
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Send message via GCM failed!!", Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Error Occurred [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                } catch (Exception e) {
+                    // TODO Auto-generated catch block
+                    Toast.makeText(getApplicationContext(), "Mostly parsing error", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(int i, cz.msebera.android.httpclient.Header[] headers, byte[] bytes, Throwable throwable) {
+                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
+                throwable.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onStart() {
             }
 
             @Override

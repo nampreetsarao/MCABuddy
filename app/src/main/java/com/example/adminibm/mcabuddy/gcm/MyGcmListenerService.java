@@ -87,7 +87,7 @@ public class MyGcmListenerService extends GcmListenerService {
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(android.R.drawable.stat_notify_chat)
-                .setContentTitle("MCA Buddy: Message:")
+                .setContentTitle("Coder Talk:")
                 .setContentText(message)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)

@@ -174,9 +174,7 @@ public class Broadcast extends Fragment {
                 //
             }
 
-            strDetailText = getChild(groupPosition, childPosition).toString();
 
-            strheader = getGroup(groupPosition).toString();
             //Toast.makeText(getActivity(),strheader, Toast.LENGTH_LONG).show();
 
             listItem = (TextView)convertView.findViewById(R.id.lblListItem);
@@ -185,8 +183,13 @@ public class Broadcast extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent listItemDetails = new Intent(getActivity(), MCABuddy_ThreadDetails.class);
+                    strDetailText = getChild(groupPosition, childPosition).toString();
 
-                    itemDetails = new Bundle();
+                    strheader = getGroup(groupPosition).toString();
+                    if(itemDetails==null)
+                    {
+                        itemDetails = new Bundle();
+                    }
                     itemDetails.putString("strDetails", strDetailText);
                     itemDetails.putStringArrayList("tags", (ArrayList<String>) messageList.get(groupPosition).getTags());
                     itemDetails.putString("strRole", getRole);
@@ -196,6 +199,8 @@ public class Broadcast extends Fragment {
                     //// TODO: 5/1/2016 change this to thread id
                     if(messageList.get(groupPosition).getThreadId()!=null && !messageList.get(groupPosition).getThreadId().equalsIgnoreCase("null")){
                         itemDetails.putString("threadId",messageList.get(groupPosition).getThreadId());
+                    }else{
+                        itemDetails.remove("threadId");
                     }
 
                     itemDetails.putString("uuid", messageList.get(groupPosition).getUuid());

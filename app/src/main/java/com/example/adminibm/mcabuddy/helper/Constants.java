@@ -37,6 +37,8 @@ public final class Constants {
     public static String updatePasswordPart2="/pwd";
     public static String updatePhonePart1="/user/";
     public static String updatePhonePart2="/phone/";
+    public static String KEY="";
+    public static String gcmURL="https://android.googleapis.com/gcm/send";
 
 
 

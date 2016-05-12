@@ -278,6 +278,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setDate(sdf.format(dd).toString());
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
+                            message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
                             List<String> tags = new ArrayList<String>();
                             if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
                                 for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
@@ -369,6 +370,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setDate(sdf.format(dd).toString());
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
+                            message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
                             List<String> tags = new ArrayList<String>();
                             if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
                                 for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {
@@ -460,6 +462,7 @@ public class BaseActivity extends AppCompatActivity implements
                             message.setDate(sdf.format(dd).toString());
 
                             message.setChannel(jsonObject.getJSONArray("response").getJSONObject(i).getString("channel"));
+                            message.setLikes(Integer.parseInt(jsonObject.getJSONArray("response").getJSONObject(i).getString("likes")));
                             List<String> tags = new ArrayList<String>();
                             if(!jsonObject.getJSONArray("response").getJSONObject(i).getString("tags").equalsIgnoreCase("null")){
                                 for (int j = 0; j < jsonObject.getJSONArray("response").getJSONObject(i).getJSONArray("tags").length(); j++) {

@@ -151,7 +151,7 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
         threadDate.setText(strDate);
         numberOfLikes.setText(String.valueOf(likes));
 
-        if(strRole.equals("user")){
+        if((channelName.equalsIgnoreCase("broadcast") ) & strRole.equals("user")){
             mLayout.setVisibility(View.GONE);
         }
 
@@ -165,6 +165,10 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
         addcommentTextView = (TextView)findViewById(R.id.addComment_editText);
         onPostClickButton = (Button)findViewById(R.id.postComment_button);
 
+        //Enabling the star if number of likes > 0
+        if(likes>0){
+            likeImageButton.setBackgroundResource(android.R.drawable.btn_star_big_on);
+        }
 
 
         likeImageButton.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +181,8 @@ public class MCABuddy_ThreadDetails extends ActionBarActivity {
                     likeAMessage(bundle.getString("uuid"));
                     likeImageButton.setBackgroundResource(android.R.drawable.btn_star_big_on);
                     likes = likes + 1;
+                    //Fix for likes
+                    bundle.putInt("likes",likes);
 
                     numberOfLikes.setText(String.valueOf(likes));
                     likeClicked = true;

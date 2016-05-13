@@ -361,8 +361,8 @@ public class MCABuddy_NewUserRegistration extends Activity {
                 // called when response HTTP status is "4XX" (eg. 401, 403, 404)
                 pd.dismiss();
                 throwable.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.getCause().getMessage().toString(), Toast.LENGTH_LONG).show();
-
+                //Toast.makeText(getApplicationContext(), "Error Occurred - Server returned bad message :" + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Error Occurred - check your internet connection or either the user already exists.", Toast.LENGTH_LONG).show();
             }
 
             @Override
